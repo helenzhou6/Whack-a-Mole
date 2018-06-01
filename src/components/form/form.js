@@ -2,38 +2,42 @@ import React from "react";
 import { UserCard } from '../userCard/userCard'
 import { getUserData } from "../../utilities/getUserData";
 
-
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      userData: '',
-    }
+    this.state = this.defaultState;
+  }
+  defaultState = {
+    input: '',
+    userData: '',
+    errorMessage: '',
   }
 
   updateDom(e) {
     e.preventDefault();
+    if (this.state.input === '') {
+      return this.setState({
+        errorMessage: 'Username field is required'
+      });
+    }
     getUserData(`https://api.github.com/users/${this.state.input}`)
       .then(data => {
-        if(data){
-          this.setState({ userData: data });
+        if (data === "error") {
+          return this.setState({ errorMessage: 'Something went wrong try again later!' })
+        } else if (data === "not valid user") {
+          return this.setState({ errorMessage: 'Not a valid GitHub username' })
         }
-        return;
+        return this.setState({ userData: data });
       })
-      .catch( () => {
-        this.setState({ userData: 'error' });
-      }
-      );
-  }
-
-  logout = () => {
-    this.setState({ userData: '', input: '' });
+      .catch(err => {
+        console.log(`fetch getUserData failed ${err.message}`)
+        this.setState({ errorMessage: 'Something went wrong try again later!' });
+      });
   }
 
   render() {
     const { input, userData } = this.state;
-    if (this.state.userData === '') {
+    if (userData === '') {
       return (<section id="section-form">
         <form onSubmit={this.getUserData}>
           <label htmlFor="username-input">
@@ -45,30 +49,14 @@ export default class Form extends React.Component {
           <button type="submit" onClick={e => this.updateDom(e)}>
             Submit
         </button>
-
+          <p>{this.state.errorMessage}</p>
         </form>
 
-      </section>)
-    } else if (this.state.userData === 'error'){
-      return (<section id="section-form">
-        <form onSubmit={this.getUserData}>
-          <label htmlFor="username-input">
-            Enter any GitHub Username:
-            <br />
-            <input id="username-input" value={input} onChange={e => this.setState({ input: e.target.value })} />
-          </label>
-          <br />
-          <button type="submit" onClick={e => this.updateDom(e)}>
-            Submit
-        </button>
-
-        </form>
-      <p>Something went wrong, please try again later!</p>
       </section>)
     }
     return (
       <React.Fragment>
-        <button onClick={this.logout}>Log Out</button>
+        <button onClick={() => this.setState(this.defaultState)}>Log Out</button>
         {userData && <UserCard data={userData} />}
       </React.Fragment>
 
