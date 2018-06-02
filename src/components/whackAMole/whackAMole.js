@@ -1,6 +1,6 @@
 import React from "react";
 import Mole from "../mole/mole";
-import { Button } from "../button/button";
+import Button from "../button/button";
 import "./whackAMole.css";
 
 export default class WhackAMole extends React.Component {
@@ -51,13 +51,13 @@ export default class WhackAMole extends React.Component {
 
   render() {
 
-    const { phase, score, totalMoles } = this.state;
+    const { phase, score } = this.state;
 
     let buttonSection;
     if (phase === "start") {
-      buttonSection = <Button onClick={this.startGame}>Start</Button>;
+      buttonSection = <div className="button-overlay"><button className="button__text" onClick={this.startGame}>Start</button></div>;
     } else if (phase === "result") {
-      buttonSection = <Button onClick={this.restart}>Play Again?</Button>;
+      buttonSection = <div className="button-overlay"><div className="button__text"><p className="has-nomargin">{score} moles hit</p><button onClick={this.restart}>Play Again?</button></div></div>;
     }
 
     const moleArray = Array.from({ length: 9 }, (_, i) => (
@@ -74,9 +74,8 @@ export default class WhackAMole extends React.Component {
         <div className="moleDesc">
           <p>Hit as many moles as you can in 10 seconds!</p>
         </div>
-        <p>{buttonSection}</p>
-        <div className="moles">{moleArray}</div>
-        <h4 className="score-text">{score} moles hit</h4>
+        <div className="moles">{buttonSection}{moleArray}</div>
+        {phase !== "result" ? <h4 className="score-text">{score} moles hit</h4> : ''}
       </React.Fragment>
     );
   }
