@@ -10,7 +10,6 @@ export default class WhackAMole extends React.Component {
       score: 0,
       phase: "start",
       time: 0,
-      totalMoles: 0
     };
   }
 
@@ -27,10 +26,7 @@ export default class WhackAMole extends React.Component {
 
   incScore = () => {
     this.setState(prevState => {
-      return {
-        score: prevState.score + 1,
-        totalMoles: prevState.totalMoles + 1
-      };
+      return { score: prevState.score + 1 };
     });
   }
 
@@ -68,7 +64,6 @@ export default class WhackAMole extends React.Component {
       <Mole
         avatarUrl={this.props.avatarUrl}
         incFunction={this.incScore}
-        incTotalMoles={this.incTotalMoles}
         key={`mole${i}`}
         gameState={phase}
       />
@@ -81,7 +76,7 @@ export default class WhackAMole extends React.Component {
         </div>
         <p>{buttonSection}</p>
         <div className="moles">{moleArray}</div>
-        <h4 className="score-text">{(score / totalMoles) * 100}% of moles hit!</h4>
+        <h4 className="score-text">{score} moles hit</h4>
       </React.Fragment>
     );
   }
