@@ -16,6 +16,8 @@
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 0;
+  top: 0;
   content: 'x';
   font-weight: 400;
   font-size: 5rem;
@@ -26,8 +28,4 @@
 .avatar {
   border-radius: 10%;
   width: 100%;
-}
-
-.is-opaque {
-  opacity: .3;
 }

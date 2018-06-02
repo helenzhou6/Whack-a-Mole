@@ -94,7 +94,7 @@ export default class Mole extends React.Component {
       return (
         <React.Fragment>
           <div className="block">
-            <img className="avatar is-opaque" src={avatarUrl} />
+            <img className="avatar" src={avatarUrl} />
           </div>
         </React.Fragment>
       );
