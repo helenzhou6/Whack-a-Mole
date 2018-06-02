@@ -9,7 +9,7 @@ export default class WhackAMole extends React.Component {
     this.state = {
       score: 0,
       phase: "start",
-      time: 0
+      time: 0,
     };
   }
 
@@ -30,9 +30,9 @@ export default class WhackAMole extends React.Component {
     });
   }
 
-  decScore = () => {
-    return this.setState(prevState => {
-      return { score: prevState.score - 1 };
+  incTotalMoles = () => {
+    this.setState(prevState => {
+      return { totalMoles: prevState.totalMoles + 1 };
     });
   }
 
@@ -42,7 +42,8 @@ export default class WhackAMole extends React.Component {
       return {
         score: 0,
         phase: "start",
-        time: 0
+        time: 0,
+        totalMoles: 0
       };
     });
     this.startGame();
@@ -50,7 +51,7 @@ export default class WhackAMole extends React.Component {
 
   render() {
 
-    const { phase } = this.state;
+    const { phase, score, totalMoles } = this.state;
 
     let buttonSection;
     if (phase === "start") {
@@ -63,7 +64,6 @@ export default class WhackAMole extends React.Component {
       <Mole
         avatarUrl={this.props.avatarUrl}
         incFunction={this.incScore}
-        decFunction={this.decScore}
         key={`mole${i}`}
         gameState={phase}
       />
@@ -73,11 +73,10 @@ export default class WhackAMole extends React.Component {
       <React.Fragment>
         <div className="moleDesc">
           <p>Hit as many moles as you can in 10 seconds!</p>
-          <p>+1 for hitting and -1 for missing</p>
         </div>
         <p>{buttonSection}</p>
         <div className="moles">{moleArray}</div>
-        <h4 className="score-text">Your score: {this.state.score}</h4>
+        <h4 className="score-text">{score} moles hit</h4>
       </React.Fragment>
     );
   }
