@@ -1,9 +1,6 @@
 .userCard {
     text-align: center;
-}
-
-.moleDesc :last-child {
-    margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .userCard__avatar {

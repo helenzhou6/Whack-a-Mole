@@ -7,7 +7,7 @@ export default class Mole extends React.Component {
     super(props);
     this.state = {
       time: 0,
-      status: "Wait..."
+      moleStatus: "waiting"
     };
   }
 
@@ -15,7 +15,7 @@ export default class Mole extends React.Component {
     clearInterval(this.timer);
     this.setState({
       time: 0,
-      status: "Wait..."
+      moleStatus: "waiting"
     });
 
     const targetTime = getRandomNo(1000, 10000);
@@ -28,7 +28,7 @@ export default class Mole extends React.Component {
         const { time } = this.state;
         this.setState({ time: Date.now() - startTime });
         if (time < targetTime && targetTime < time + timeLimit) {
-          this.setState({ status: "HIT ME!" });
+          this.setState({ moleStatus: "HIT ME!" });
         } else if (time > targetTime + timeLimit) {
           this.props.decFunction();
           this.startGame();
@@ -50,7 +50,7 @@ export default class Mole extends React.Component {
     clearInterval(this.timer);
     this.setState({
       time: 0,
-      status: "hit"
+      moleStatus: "hit"
     });
 
     this.timer = setInterval(() => {
@@ -59,10 +59,10 @@ export default class Mole extends React.Component {
   };
 
   render() {
-    const { status } = this.state;
+    const { moleStatus } = this.state;
     const { avatarUrl } = this.props;
 
-    if (status === "HIT ME!") {
+    if (moleStatus === "HIT ME!") {
       return (
         <React.Fragment>
           <div className="block">
@@ -70,7 +70,7 @@ export default class Mole extends React.Component {
           </div>
         </React.Fragment>
       );
-    } else if (status === "hit") {
+    } else if (moleStatus === "hit") {
       return (
         <React.Fragment>
           <div className="block hit"></div>
