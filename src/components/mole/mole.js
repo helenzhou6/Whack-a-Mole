@@ -44,7 +44,7 @@ export default class Mole extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.gameState === 'running' && prevState.moleStatus === 'waiting' && !prevState.gameIsRunning) {
+    if (this.props.gameState === 'running' && !prevState.gameIsRunning) {
       this.startGame();
     } else if (this.props.gameState === 'result' && prevState.gameIsRunning) {
       clearInterval(this.timer);
@@ -75,7 +75,7 @@ export default class Mole extends React.Component {
   render() {
 
     const { moleStatus, gameIsRunning } = this.state;
-    const { avatarUrl, gameState } = this.props;
+    const { avatarUrl } = this.props;
 
     if (moleStatus === "HIT ME!" && gameIsRunning) {
       return (
@@ -85,17 +85,17 @@ export default class Mole extends React.Component {
           </div>
         </React.Fragment>
       );
-    } else if (moleStatus === "hit") {
+    } else if (moleStatus === "hit" && gameIsRunning) {
       return (
         <React.Fragment>
           <div className="block hit"></div>
         </React.Fragment>
       );
-    } else if (moleStatus === "HIT ME!" && !gameIsRunning && gameState === 'result') {
+    } else if (moleStatus === "HIT ME!" && !gameIsRunning) {
       return (
         <React.Fragment>
           <div className="block">
-            <img onClick={this.onClick} className="avatar is-opaque" src={avatarUrl} />
+            <img className="avatar is-opaque" src={avatarUrl} />
           </div>
         </React.Fragment>
       );
