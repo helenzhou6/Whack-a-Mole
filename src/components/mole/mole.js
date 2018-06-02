@@ -1,5 +1,6 @@
 import React from "react";
 import "./mole.css";
+import { getRandomNo } from "../../utilities/getRandomNo";
 
 export default class Mole extends React.Component {
   constructor(props) {
@@ -10,13 +11,9 @@ export default class Mole extends React.Component {
     };
   }
 
-  decScore = () => {
-    this.props.decFunction();
-  }
-
   startGame = () => {
-    const targetTime = Math.floor(Math.random() * 10000) + 1000; // Random number between 1 second & 10 seconds
-    const timeLimit = Math.floor(Math.random() * 1000) + 500; // Random number between 500ms & 1 second
+    const targetTime = getRandomNo(1000, 10000);
+    const timeLimit = getRandomNo(500, 1000);
 
     const { time } = this.state;
     this.setState(() => {
@@ -27,8 +24,7 @@ export default class Mole extends React.Component {
         if (time < targetTime && targetTime < time + timeLimit) {
           this.setState({ status: "HIT ME!" });
         } else if (time > targetTime + timeLimit) {
-          // this.setState({ status: "Wait..." });
-          this.decScore();
+          this.props.decFunction();
           this.restart();
         }
       });
