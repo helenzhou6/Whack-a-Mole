@@ -49,47 +49,36 @@ export default class WhackAMole extends React.Component {
   };
 
   render() {
-    if (this.state.phase === "start") {
-      return (
-        <React.Fragment>
-          <div className="moleDesc">
-            <p>Hit as many moles as you can in 10 seconds!</p>
-            <p>+1 for hitting and -1 for missing</p>
-          </div>
-          <Button onClick={this.startGame}>Start</Button>
-        </React.Fragment>
-      );
-    } else if (this.state.phase === "running") {
-      const moleArray = Array.from({ length: 9 }, (_, i) => (
-        <Mole
-          avatarUrl={this.props.avatarUrl}
-          incFunction={this.incScore}
-          decFunction={this.decScore}
-          key={`mole${i}`}
-        />
-      ));
 
-      return (
-        <React.Fragment>
-          <div className="moleDesc">
-            <p>Hit as many moles as you can in 10 seconds!</p>
-            <p>+1 for hitting and -1 for missing</p>
-          </div>
-          <div className="moles">{moleArray}</div>
-          <h4 className="score-text">Your score: {this.state.score}</h4>
-        </React.Fragment>
-      );
-    } else if (this.state.phase === "result") {
-      return (
-        <React.Fragment>
-          <div className="moleDesc">
-            <p>Hit as many moles as you can in 10 seconds!</p>
-            <p>+1 for hitting and -1 for missing</p>
-          </div>
-          <h4 className="score-text">Your score: {this.state.score}</h4>
-          <Button onClick={this.restart}>Play Again?</Button>
-        </React.Fragment>
-      );
+    const { phase } = this.state;
+
+    let buttonSection;
+    if (phase === "start") {
+      buttonSection = <Button onClick={this.startGame}>Start</Button>;
+    } else if (phase === "result") {
+      buttonSection = <Button onClick={this.restart}>Play Again?</Button>;
     }
+
+    const moleArray = Array.from({ length: 9 }, (_, i) => (
+      <Mole
+        avatarUrl={this.props.avatarUrl}
+        incFunction={this.incScore}
+        decFunction={this.decScore}
+        key={`mole${i}`}
+        gameState={phase}
+      />
+    ));
+
+    return (
+      <React.Fragment>
+        <div className="moleDesc">
+          <p>Hit as many moles as you can in 10 seconds!</p>
+          <p>+1 for hitting and -1 for missing</p>
+        </div>
+        <p>{buttonSection}</p>
+        <div className="moles">{moleArray}</div>
+        <h4 className="score-text">Your score: {this.state.score}</h4>
+      </React.Fragment>
+    );
   }
 }

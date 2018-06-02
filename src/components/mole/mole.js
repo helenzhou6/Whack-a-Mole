@@ -7,16 +7,22 @@ export default class Mole extends React.Component {
     super(props);
     this.state = {
       time: 0,
-      moleStatus: "waiting"
+      moleStatus: "waiting",
+      gameIsRunning: false
     };
   }
 
-  startGame = () => {
+  reset = (gameIsRunning) => {
     clearInterval(this.timer);
     this.setState({
       time: 0,
-      moleStatus: "waiting"
+      moleStatus: "waiting",
+      gameIsRunning
     });
+  }
+
+  startGame = () => {
+    this.reset(true);
 
     const targetTime = getRandomNo(1000, 10000);
     const timeLimit = getRandomNo(500, 1000);
@@ -37,12 +43,20 @@ export default class Mole extends React.Component {
     });
   };
 
-  componentDidMount() {
-    this.startGame();
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.gameState === 'running' && prevState.moleStatus === 'waiting' && !prevState.gameIsRunning) {
+      this.startGame();
+    } else if (this.props.gameState === 'result' && prevState.gameIsRunning) {
+      clearInterval(this.timer);
+      this.setState({
+        time: 0,
+        gameIsRunning: false
+      });
+    }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    this.reset(false);
   }
 
   onClick = e => {
@@ -59,10 +73,11 @@ export default class Mole extends React.Component {
   };
 
   render() {
-    const { moleStatus } = this.state;
-    const { avatarUrl } = this.props;
 
-    if (moleStatus === "HIT ME!") {
+    const { moleStatus, gameIsRunning } = this.state;
+    const { avatarUrl, gameState } = this.props;
+
+    if (moleStatus === "HIT ME!" && gameIsRunning) {
       return (
         <React.Fragment>
           <div className="block">
@@ -74,6 +89,14 @@ export default class Mole extends React.Component {
       return (
         <React.Fragment>
           <div className="block hit"></div>
+        </React.Fragment>
+      );
+    } else if (moleStatus === "HIT ME!" && !gameIsRunning && gameState === 'result') {
+      return (
+        <React.Fragment>
+          <div className="block">
+            <img onClick={this.onClick} className="avatar is-opaque" src={avatarUrl} />
+          </div>
         </React.Fragment>
       );
     } else {
