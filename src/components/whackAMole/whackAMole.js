@@ -10,8 +10,6 @@ export default class WhackAMole extends React.Component {
       phase: "start",
       time: 0
     };
-    this.incScore = this.incScore.bind(this);
-    this.decScore = this.decScore.bind(this);
   }
 
   startGame = () => {
@@ -25,16 +23,15 @@ export default class WhackAMole extends React.Component {
     clearTimeout(this.timer);
   }
 
-  incScore(e) {
+  incScore = (e) => {
     e.preventDefault();
     this.setState(prevState => {
       return { score: prevState.score + 1 };
     });
   }
 
-  decScore() {
-    // e.preventDefault();
-      return this.setState(prevState => {
+  decScore = () => {
+    return this.setState(prevState => {
       return { score: prevState.score - 1 };
     });
   }
@@ -57,29 +54,20 @@ export default class WhackAMole extends React.Component {
         <React.Fragment>
           <h3>Whack a mole</h3>
           <div className="moleDesc">
-          <p>Your face is the mole!</p>
-          <p>Try and whack it as many times as you can!</p>
-          <p>You get +1 point for hitting and -1 point for missing</p>
+            <p>Your face is the mole!</p>
+            <p>Try and whack it as many times as you can!</p>
+            <p>You get +1 point for hitting and -1 point for missing</p>
           </div>
           <button onClick={this.startGame}>Start</button>
         </React.Fragment>
       );
     } else if (this.state.phase === "running") {
-      // const moleArray = [];
-      // for (let i = 0; i < 9; i++) {
-      //   moleArray.push(<Mole
-      //     avatarUrl={this.props.avatarUrl}
-      //     incFunction={this.incScore}
-      //     decFunction={this.decScore}
-      //     key={i} //
-      //   />)
-      // }
       const moleArray = Array.from({ length: 9 }, (_, i) => (
         <Mole
           avatarUrl={this.props.avatarUrl}
           incFunction={this.incScore}
           decFunction={this.decScore}
-          key={i}
+          key={`mole${i}`}
         />
       ));
 
@@ -87,9 +75,9 @@ export default class WhackAMole extends React.Component {
         <React.Fragment>
           <h3>Whack a mole</h3>
           <div className="moleDesc">
-          <p>Your face is the mole!</p>
-          <p>Try and whack it as many times as you can!</p>
-          <p>You get +1 point for hitting and -1 point for missing</p>
+            <p>Your face is the mole!</p>
+            <p>Try and whack it as many times as you can!</p>
+            <p>You get +1 point for hitting and -1 point for missing</p>
           </div>
           <div className="moles">{moleArray}</div>
           <h4>Your score: {this.state.score}</h4>
@@ -100,9 +88,9 @@ export default class WhackAMole extends React.Component {
         <React.Fragment>
           <h3>Whack a mole</h3>
           <div className="moleDesc">
-          <p>Your face is the mole!</p>
-          <p>Try and whack it as many times as you can!</p>
-          <p>You get +1 point for hitting and -1 point for missing</p>
+            <p>Your face is the mole!</p>
+            <p>Try and whack it as many times as you can!</p>
+            <p>You get +1 point for hitting and -1 point for missing</p>
           </div>
           <h4>Your score: {this.state.score}</h4>
           <button onClick={this.restart}>Play Again?</button>
