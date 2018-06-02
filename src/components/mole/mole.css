@@ -4,8 +4,23 @@
   height: 0;
   padding-bottom: 100%;
   border-radius: 10%;
+
   background-color: #4A4A4A;
 }
+
+.hit {
+  position: relative;
+}
+
+.hit:after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: 'x';
+  font-size: 5rem;
+  color: #F5F1F1;
+}
+
 
 .avatar {
   border-radius: 10%;

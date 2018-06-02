@@ -12,6 +12,12 @@ export default class Mole extends React.Component {
   }
 
   startGame = () => {
+    clearInterval(this.timer);
+    this.setState({
+      time: 0,
+      status: "Wait..."
+    });
+
     const targetTime = getRandomNo(1000, 10000);
     const timeLimit = getRandomNo(500, 1000);
 
@@ -25,19 +31,10 @@ export default class Mole extends React.Component {
           this.setState({ status: "HIT ME!" });
         } else if (time > targetTime + timeLimit) {
           this.props.decFunction();
-          this.restart();
+          this.startGame();
         }
       });
     });
-  };
-
-  restart = () => {
-    clearInterval(this.timer);
-    this.setState({
-      time: 0,
-      status: "Wait..."
-    });
-    this.startGame();
   };
 
   componentDidMount() {
@@ -50,7 +47,15 @@ export default class Mole extends React.Component {
 
   onClick = e => {
     this.props.incFunction(e);
-    this.restart();
+    clearInterval(this.timer);
+    this.setState({
+      time: 0,
+      status: "hit"
+    });
+
+    this.timer = setInterval(() => {
+      this.startGame();
+    }, 400);
   };
 
   render() {
@@ -65,10 +70,16 @@ export default class Mole extends React.Component {
           </div>
         </React.Fragment>
       );
+    } else if (status === "hit") {
+      return (
+        <React.Fragment>
+          <div className="block hit"></div>
+        </React.Fragment>
+      );
     } else {
       return (
         <React.Fragment>
-          <div className="block">&nbsp;</div>
+          <div className="block"></div>
         </React.Fragment>
       );
     }
