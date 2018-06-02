@@ -1,6 +1,8 @@
 import React from "react";
 import { UserCard } from '../userCard/userCard'
 import { getUserData } from "../../utilities/getUserData";
+import './form.css'
+import { Button } from '../button/button'
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -13,7 +15,7 @@ export default class Form extends React.Component {
     errorMessage: '',
   }
 
-  updateDom(e) {
+  updateDom = (e) => {
     e.preventDefault();
     if (this.state.input === '') {
       return this.setState({
@@ -39,16 +41,14 @@ export default class Form extends React.Component {
     const { input, userData } = this.state;
     if (userData === '') {
       return (<section id="section-form">
-        <form onSubmit={this.getUserData}>
+        <form className="form" onSubmit={this.getUserData}>
           <label htmlFor="username-input">
             Enter any GitHub Username:
             <br />
-            <input id="username-input" value={input} onChange={e => this.setState({ input: e.target.value })} />
+            <input className="form__input" id="username-input" value={input} onChange={e => this.setState({ input: e.target.value })} />
           </label>
           <br />
-          <button type="submit" onClick={e => this.updateDom(e)}>
-            Submit
-        </button>
+          <Button onClick={this.updateDom}>Play!</Button>
           <p>{this.state.errorMessage}</p>
         </form>
 
@@ -56,7 +56,7 @@ export default class Form extends React.Component {
     }
     return (
       <React.Fragment>
-        <button onClick={() => this.setState(this.defaultState)}>Log Out</button>
+        <Button onClick={() => this.setState(this.defaultState)}>Log Out</Button>
         {userData && <UserCard data={userData} />}
       </React.Fragment>
 
