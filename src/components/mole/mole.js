@@ -36,9 +36,10 @@ export default class Mole extends React.Component {
         if (time < targetTime && targetTime < time + timeLimit) {
           this.setState({ moleStatus: "HIT ME!" });
         } else if (time > targetTime + timeLimit) {
+          this.props.incTotalMoles();
           this.startGame();
         }
-      });
+      }, 500);
     });
   };
 
@@ -58,8 +59,8 @@ export default class Mole extends React.Component {
     this.reset(false);
   }
 
-  onClick = e => {
-    this.props.incFunction(e);
+  onClick = () => {
+    this.props.incFunction();
     clearInterval(this.timer);
     this.setState({
       time: 0,
