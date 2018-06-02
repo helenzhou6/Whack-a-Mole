@@ -17,6 +17,7 @@
   left: 0;
   right: 0;
   content: 'x';
+  font-weight: 400;
   font-size: 5rem;
   color: #F5F1F1;
 }

@@ -7,3 +7,15 @@
   max-width: 30rem;
   margin: 0 auto;
 }
+
+.moleDesc p {
+  font-weight: 400;
+}
+
+.moleDesc p:last-child {
+  margin-top: 0;
+}
+
+.moleDesc p:first-child {
+  margin-bottom: .1rem;
+}
