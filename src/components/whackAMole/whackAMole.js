@@ -1,6 +1,5 @@
 import React from "react";
 import Mole from "../mole/mole";
-import Button from "../button/button";
 import "./whackAMole.css";
 
 export default class WhackAMole extends React.Component {
