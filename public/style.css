@@ -17,3 +17,11 @@ body {
 .to-lowercase {
   text-transform: lowercase;
 }
+
+a:visited {
+  color: #4A4A4A;
+}
+
+a {
+  color: #4A4A4A;
+}

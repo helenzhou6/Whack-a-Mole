@@ -1,5 +1,6 @@
 import React from "react";
 import Mole from "../mole/mole";
+import { Button } from "../button/button";
 import "./whackAMole.css";
 
 export default class WhackAMole extends React.Component {
@@ -23,8 +24,7 @@ export default class WhackAMole extends React.Component {
     clearTimeout(this.timer);
   }
 
-  incScore = (e) => {
-    e.preventDefault();
+  incScore = () => {
     this.setState(prevState => {
       return { score: prevState.score + 1 };
     });
@@ -52,13 +52,10 @@ export default class WhackAMole extends React.Component {
     if (this.state.phase === "start") {
       return (
         <React.Fragment>
-          <h3>Whack a mole</h3>
           <div className="moleDesc">
-            <p>Your face is the mole!</p>
-            <p>Try and whack it as many times as you can!</p>
-            <p>You get +1 point for hitting and -1 point for missing</p>
+            <p>+1 for hitting and -1 for missing</p>
           </div>
-          <button onClick={this.startGame}>Start</button>
+          <Button onClick={this.startGame}>Start</Button>
         </React.Fragment>
       );
     } else if (this.state.phase === "running") {
@@ -73,11 +70,8 @@ export default class WhackAMole extends React.Component {
 
       return (
         <React.Fragment>
-          <h3>Whack a mole</h3>
           <div className="moleDesc">
-            <p>Your face is the mole!</p>
-            <p>Try and whack it as many times as you can!</p>
-            <p>You get +1 point for hitting and -1 point for missing</p>
+            <p>+1 for hitting and -1 for missing</p>
           </div>
           <div className="moles">{moleArray}</div>
           <h4>Your score: {this.state.score}</h4>
@@ -86,14 +80,11 @@ export default class WhackAMole extends React.Component {
     } else if (this.state.phase === "result") {
       return (
         <React.Fragment>
-          <h3>Whack a mole</h3>
           <div className="moleDesc">
-            <p>Your face is the mole!</p>
-            <p>Try and whack it as many times as you can!</p>
-            <p>You get +1 point for hitting and -1 point for missing</p>
+            <p>+1 for hitting and -1 for missing</p>
           </div>
           <h4>Your score: {this.state.score}</h4>
-          <button onClick={this.restart}>Play Again?</button>
+          <Button onClick={this.restart}>Play Again?</Button>
         </React.Fragment>
       );
     }

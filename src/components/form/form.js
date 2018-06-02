@@ -12,28 +12,35 @@ export default class Form extends React.Component {
   defaultState = {
     input: '',
     userData: '',
-    errorMessage: '',
+    userMessage: '',
   }
+
+  reset = () => this.setState(this.defaultState);
 
   updateDom = (e) => {
     e.preventDefault();
     if (this.state.input === '') {
       return this.setState({
-        errorMessage: 'Username field is required'
+        userMessage: 'Username field is required'
       });
     }
+    this.setState({
+      userMessage: 'Loading...'
+    });
     getUserData(`https://api.github.com/users/${this.state.input}`)
       .then(data => {
         if (data === "error") {
-          return this.setState({ errorMessage: 'Something went wrong try again later!' })
+          return this.setState({ userMessage: 'Something went wrong try again later!' })
         } else if (data === "not valid user") {
-          return this.setState({ errorMessage: 'Not a valid GitHub username' })
+          return this.setState({
+            userMessage: `${this.state.input} is not a valid username`
+          })
         }
         return this.setState({ userData: data });
       })
       .catch(err => {
         console.log(`fetch getUserData failed ${err.message}`)
-        this.setState({ errorMessage: 'Something went wrong try again later!' });
+        this.setState({ userMessage: 'Something went wrong try again later!' });
       });
   }
 
@@ -49,17 +56,15 @@ export default class Form extends React.Component {
           </label>
           <br />
           <Button onClick={this.updateDom}>Play!</Button>
-          <p>{this.state.errorMessage}</p>
+          <p>{this.state.userMessage}</p>
         </form>
 
       </section>)
     }
     return (
       <React.Fragment>
-        <Button onClick={() => this.setState(this.defaultState)}>Log Out</Button>
-        {userData && <UserCard data={userData} />}
+        {userData && <UserCard data={userData} logout={this.reset} />}
       </React.Fragment>
-
     )
   }
 }
