@@ -1,0 +1,17 @@
+.button {
+  background-color: #4a4a4a;
+  color: #F5F1F1;
+  border: #4a4a4a;
+  border-radius: 5px;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .05rem;
+  padding: .5rem 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.button:focus {
+  outline: none;
+  background-color: #808080;
+}

@@ -13,12 +13,14 @@ test('form component', () => {
     <Form />
   );
 
-  const button = getByText('Submit');
+  const button = getByText('Play!');
   const input = getByLabelText('Enter any GitHub Username:');
 
   input.value = 'helenzhou6';
   fireEvent.change(input);
   fireEvent.click(button);
-  return waitForElement(() => getByTestId('userData')).then(output => expect(output.innerHTML).toEqual("Hello <a href=\"https://github.com/helenzhou6\">helenzhou6!</a>"))
+  return waitForElement(() => getByTestId('userData'))
+    .then(output => expect(output.innerHTML)
+      .toEqual("The mole:<a class=\"userCard__details\" href=\"https://github.com/helenzhou6\"><img class=\"userCard__avatar\" src=\"https://avatars1.githubusercontent.com/u/25727036?v=4\">helenzhou6</a><button class=\"button\">↩</button>"))
 
 })

@@ -1,13 +1,16 @@
 .userCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.userCard p {
-    margin: 4px 0;
+    text-align: center;
 }
 
 .moleDesc :last-child {
     margin-bottom: 1rem;
+}
+
+.userCard__avatar {
+    width: 1rem;
+    margin: -.1rem .3rem .2rem .5rem;
+}
+
+.userCard__details {
+    margin-right: .5rem;
 }

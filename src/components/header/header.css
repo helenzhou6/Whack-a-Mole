@@ -1,0 +1,17 @@
+.is-small-fontSize {
+  font-size: .5em;
+  margin: .05rem;
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  margin: -.3rem 0 2rem;
+  font-size: .8rem;
+  text-align: center;
+}
