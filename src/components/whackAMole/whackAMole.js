@@ -53,6 +53,7 @@ export default class WhackAMole extends React.Component {
       return (
         <React.Fragment>
           <div className="moleDesc">
+            <p>Hit as many moles as you can in 10 seconds!</p>
             <p>+1 for hitting and -1 for missing</p>
           </div>
           <Button onClick={this.startGame}>Start</Button>
