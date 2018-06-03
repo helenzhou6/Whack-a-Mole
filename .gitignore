@@ -64,4 +64,3 @@ config.env
 .cache
 dist
 token.js
-__mocks__
