@@ -1,4 +1,6 @@
-# HP-game
+# Whack-a-mole!
+
+[![Build Status](https://travis-ci.org/helenzhou6/Whack-a-Mole.svg?branch=master)](https://travis-ci.org/helenzhou6/Whack-a-Mole)
 
 [The Project outline](https://github.com/oliverjam/fac-react-project/blob/master/README.md)
 
