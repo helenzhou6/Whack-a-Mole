@@ -1,5 +1,5 @@
 {
-  "name": "HP-game",
+  "name": "Whack-a-mole",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fac-13/HP-game.git"
+    "url": "git+https://github.com/helenzhou6/Whack-a-Mole.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fac-13/HP-game/issues"
+    "url": "https://github.com/helenzhou6/Whack-a-Mole/issues"
   },
-  "homepage": "https://github.com/fac-13/HP-game#readme",
+  "homepage": "https://github.com/helenzhou6/Whack-a-Mole#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
