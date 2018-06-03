@@ -8,7 +8,7 @@ export const UserCard = props => {
 
   return (
     <div className="userCard">
-      <p data-testid="userData">The mole:<a className="userCard__details" href={html_url}><img className="userCard__avatar" src={avatar_url} />{login}</a><Button onClick={logout}>↩</Button></p>
+      <p data-testid="userData">The mole:<a className="userCard__details" href={html_url}><img className="userCard__avatar" src={avatar_url} />{login}</a><Button onClick={logout}>&#10550;</Button></p>
       <WhackAMole avatarUrl={avatar_url} />
     </div>
   );
