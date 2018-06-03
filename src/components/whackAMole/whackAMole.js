@@ -29,12 +29,6 @@ export default class WhackAMole extends React.Component {
     });
   }
 
-  incTotalMoles = () => {
-    this.setState(prevState => {
-      return { totalMoles: prevState.totalMoles + 1 };
-    });
-  }
-
   restart = () => {
     clearInterval(this.timer);
     this.setState(() => {
@@ -54,9 +48,9 @@ export default class WhackAMole extends React.Component {
 
     let buttonSection;
     if (phase === "start") {
-      buttonSection = <div className="button-overlay"><button className="button__text" onClick={this.startGame}>Start</button></div>;
+      buttonSection = <div className="button-overlay"><button className="button__text is-underlined" onClick={this.startGame}>Start</button></div>;
     } else if (phase === "result") {
-      buttonSection = <div className="button-overlay"><div className="button__text"><p className="has-nomargin">{score} moles hit</p><button onClick={this.restart}>Play Again?</button></div></div>;
+      buttonSection = <div className="button-overlay"><div className="button__text"><p className="has-nomargin">{score} moles hit</p><button className="is-underlined" onClick={this.restart}>Play Again?</button></div></div>;
     }
 
     const moleArray = Array.from({ length: 9 }, (_, i) => (
