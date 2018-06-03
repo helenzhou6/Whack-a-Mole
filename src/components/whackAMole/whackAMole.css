@@ -39,14 +39,8 @@
   left: 50%;
 }
 
-.button__text:after {
-  width: 95%;
-  position: absolute;
-  height: 3px;
-  background-color: #4A4A4A;
-  content: '';
-  left: 4px;
-  bottom: 4px;
+.is-underlined {
+  text-decoration: underline;
 }
 
 button {

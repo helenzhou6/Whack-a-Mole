@@ -58,7 +58,8 @@ export default class Mole extends React.Component {
     this.reset(false);
   }
 
-  onClick = () => {
+  onClick = (e) => {
+    e.preventDefault();
     this.props.incFunction();
     clearInterval(this.timer);
     this.setState({
@@ -80,7 +81,7 @@ export default class Mole extends React.Component {
       return (
         <React.Fragment>
           <div className="block">
-            <img onClick={this.onClick} className="avatar" src={avatarUrl} />
+            <img onClick={e => this.onClick(e)} className="avatar" src={avatarUrl} />
           </div>
         </React.Fragment>
       );
