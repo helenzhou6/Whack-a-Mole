@@ -21,6 +21,6 @@ test('form component', () => {
   fireEvent.click(button);
   return waitForElement(() => getByTestId('userData'))
     .then(output => expect(output.innerHTML)
-      .toEqual("The mole:<a class=\"userCard__details\" href=\"https://github.com/helenzhou6\"><img class=\"userCard__avatar\" src=\"https://avatars1.githubusercontent.com/u/25727036?v=4\">helenzhou6</a><button class=\"button\">↩</button>"))
+      .toEqual("The mole:<a class=\"userCard__details\" href=\"https://github.com/helenzhou6\"><img class=\"userCard__avatar\" src=\"https://avatars1.githubusercontent.com/u/25727036?v=4\">helenzhou6</a><button class=\"button\">⤶</button>"))
 
 })
