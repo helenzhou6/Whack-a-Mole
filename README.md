@@ -1,8 +1,6 @@
-# HP-game
+# Whack-a-mole!
 
-[The Project outline](https://github.com/oliverjam/fac-react-project/blob/master/README.md)
-
-Phat and Helen bring you... a game!
+[![Build Status](https://travis-ci.org/helenzhou6/Whack-a-Mole.svg?branch=master)](https://travis-ci.org/helenzhou6/Whack-a-Mole)
 
 * To Do:
 - [x] Let you submit a username
